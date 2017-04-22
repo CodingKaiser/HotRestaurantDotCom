@@ -62,6 +62,80 @@
 
 	</div>
 
+<script type="text/javascript">
+	
+		function runTableQuery(){
+
+		var currentURL = window.location.origin;
+		
+		console.log(currentURL);
+
+
+		$.ajax({url: currentURL + "/api/waitlist", method: "GET"})
+			.done(function(tableData) {
+
+				// console.log(currentURL);
+
+				console.log("------------------------------------");
+				console.log("URL: " + currentURL + "/api/reservations");
+				console.log("------------------------------------");
+
+
+				console.log(tableData);
+				console.log("------------------------------------")
+
+
+				for (var i=0; i<tableData.length; i++){
+
+
+					var tableSection = $("<div>");
+					tableSection.addClass('well');
+					tableSection.attr('id', 'tableWell-' + i+1)
+					$('#tableSection').append(waitlistSection);
+
+					var tableNumber = i + 1;
+
+
+
+					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + "</span> | " + tableData[i].customerID + "</h2>");
+				}
+			});
+	
+		$.ajax({url: currentURL + "/api/reservations", method: "GET"})
+			.done(function(tableData) {
+
+				// console.log(currentURL);
+
+				console.log("------------------------------------");
+				console.log("URL: " + currentURL + "/api/reservations");
+				console.log("------------------------------------");
+
+
+				console.log(tableData);
+				console.log("------------------------------------")
+
+
+				for (var i=0; i<tableData.length; i++){
+
+
+					var tableSection = $("<div>");
+					tableSection.addClass('well');
+					tableSection.attr('id', 'tableWell-' + i+1)
+					$('#tableSection').append(tableSection);
+
+					var tableNumber = i + 1;
+
+
+
+					$("#tableWell-"+ i+1).append('<h2><span class="label label-primary">' + tableNumber + " " + "</span> | " + tableData[i].number + " " + tableData[i].name + " " + tableData[i].email + " " + "</h2>");
+				}
+			});
+	}
+	runTableQuery();
+	
+</script>
+
+
 </body>
 
 
